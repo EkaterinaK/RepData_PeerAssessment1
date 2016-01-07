@@ -5,7 +5,7 @@ output:
     keep_md: true
 ---
 
-Reproducible Research: Peer Assessment 1
+# Reproducible Research: Peer Assessment 1
 
 ========================================
 
@@ -86,7 +86,8 @@ Let's make a histogram of the total number of steps taken each day
 hist(steps_per_day$steps_sum, 
      breaks = 16, 
      main = "Histogram of steps per day", 
-     xlab = "Sum of steps per day")
+     xlab = "Sum of steps per day",
+     col = "grey")
 ```
 
 ![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
@@ -168,24 +169,25 @@ steps_per_day1 <- merged %>% group_by(date) %>% summarize(steps_sum = sum(steps_
 hist(steps_per_day1$steps_sum, 
      breaks = 16,
      main = "Histogram of steps per day\n(missing values were replaced)", 
-     xlab = "Sum of steps per day")
+     xlab = "Sum of steps per day",
+     col = "pink")
 ```
 
 ![plot of chunk unnamed-chunk-11](figure/unnamed-chunk-11-1.png) 
 
 
 ```r
-avg1 <- mean(steps_per_day1$steps_sum)
+avg1 <- sprintf("%.2f", mean(steps_per_day1$steps_sum))
 # 10766.19
-med1 <- median(steps_per_day1$steps_sum)
+med1 <- sprintf("%.2f", median(steps_per_day1$steps_sum))
 # 10766.19
 ```
 
-Mean is 1.0766189 &times; 10<sup>4</sup> and median is 1.0766189 &times; 10<sup>4</sup>.
+Mean is 10766.19 and median is 10766.19.
 
 As we can see new values of mean and median differ from previously calculated estimated values:
-- mean: 1.0766189 &times; 10<sup>4</sup> instead of 9354.2295082;
-- median: 1.0766189 &times; 10<sup>4</sup> instead of 10395.
+- mean: 10766.19 instead of 9354.2295082;
+- median: 10766.19 instead of 10395.
 The impact of imputing missing data is enlarging values.
 
 ## Are there differences in activity patterns between weekdays and weekends?
@@ -267,3 +269,5 @@ xyplot(steps_avg ~ interval | dtype,
 ```
 
 ![plot of chunk unnamed-chunk-15](figure/unnamed-chunk-15-1.png) 
+
+As you can see, the weekend distribution of steps is more spread out over the time intervals than the weekdays distribution.
